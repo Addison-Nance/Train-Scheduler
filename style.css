@@ -1,0 +1,18 @@
+h1 {
+    text-align: center;
+    color: white;
+  }
+  .cont1 {
+    background-color:rebeccapurple;
+    height: 200px;
+    padding-top: 25px;
+    margin-top: 20px;
+  }
+  h3 {
+    text-align: center;
+    color: white;
+  }
+  .col-md-2 {
+    background-color: #c1c1c1;
+  }
+  
