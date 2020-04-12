@@ -1,3 +1,4 @@
+
 //firebase configuration information.
 var firebaseConfig = {
   apiKey: "AIzaSyBe8XrpsjsmnRjLpwMC3srwIyCRytawPYA",
@@ -11,33 +12,39 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
-
+var database=firebase.database();
 var trainName = "";
 var destination = "";
 var frequency = "";
 var firstTrainTime = "";
 var nextArrival = "";
 var minutesAway = "";
-var trains = [];
-$(document).ready(function(){
-
-
-
-
-
-    
+var trains = "";
+var trainNumber=1
+newTrain=[];
+database.ref().on("child_added", function(childSnapshot){
+    newTrainName=childSnapshot.val().trainName;
+    newTrainDestination=childSnapshot.val().destination;
+    newTrainFrequency=childSnapshot.val().frequency;
+    newTrainTime=childSnapshot.val().firstTrainTime;
+    console.log(newTrainName)
+    $("#table").append("<tr><td>"+newTrainName+"</td><td>"+newTrainDestination+"</td><td>"+newTrainFrequency+"</td></tr>")
+// If any errors are experienced, log them to console.
+}, function(errorObject) {
+  console.log("The read failed: " + errorObject.code);
 });
 
 
 $("#submit-bttn").on("click", function () {
   event.preventDefault();
 
-  trainName = $("#nameinput").val();
-  destination = $("#destinationinput").val();
-  frequency = $("#frequencyinput").val();
-  firstTrainTime = $("#first-train-input").val();
-    var trainrow ="<tbody><tr> <td scope='row'>" + trainName +"</td> <td>" + destination +"</td> <td>Every " + frequency + " minutes</td></tr></tbody>";
-    $("#table").append(trainrow)
-
+  newTrain.trainName = $("#nameinput").val();
+  newTrain.destination = $("#destinationinput").val();
+  newTrain.frequency = $("#frequencyinput").val();
+  newTrain.firstTrainTime = $("#first-train-input").val();
+  
+    database.ref().push(newTrain)
 });
+
+
+
