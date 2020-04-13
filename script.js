@@ -27,8 +27,17 @@ database.ref().on("child_added", function(childSnapshot){
     newTrainDestination=childSnapshot.val().destination;
     newTrainFrequency=childSnapshot.val().frequency;
     newTrainTime=childSnapshot.val().firstTrainTime;
-    console.log(newTrainName)
-    $("#table").append("<tr><td>"+newTrainName+"</td><td>"+newTrainDestination+"</td><td>"+newTrainFrequency+"</td></tr>")
+    // console.log(newTrainName)
+    var nextoccurance=moment(newTrainTime,"HH:mm")
+    
+    console.log(nextoccurance);
+
+
+
+
+
+    $("#table").append("<tr><td>"+newTrainName+"</td><td>"+newTrainDestination+"</td><td>"+newTrainFrequency+"</td><td>"+nextoccurance+"</tr>")
+
 // If any errors are experienced, log them to console.
 }, function(errorObject) {
   console.log("The read failed: " + errorObject.code);
