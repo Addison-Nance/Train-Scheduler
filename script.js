@@ -27,10 +27,9 @@ database.ref().on("child_added", function(childSnapshot){
     newTrainDestination=childSnapshot.val().destination;
     newTrainFrequency=childSnapshot.val().frequency;
     newTrainTime=childSnapshot.val().firstTrainTime;
-    // console.log(newTrainName)
-    var nextoccurance=moment(newTrainTime,"HH:mm")
-    
-    console.log(nextoccurance);
+    // captrues newTrainTime and converts it to a momentjs object
+    //capture frequency and calculate time of next train
+    //calculates time til next train and pushes to display
 
 
 
